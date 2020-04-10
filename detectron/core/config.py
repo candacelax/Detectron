@@ -51,6 +51,7 @@ import numpy as np
 import os
 import os.path as osp
 import six
+import yaml
 
 from detectron.utils.collections import AttrDict
 from detectron.utils.io import cache_url
@@ -1142,7 +1143,7 @@ def load_cfg(cfg_to_load):
         cfg_to_load = cfg_to_load.replace(old_module, new_module)
     # Import inline due to a circular dependency between env.py and config.py
     import detectron.utils.env as envu
-    return envu.yaml_load(cfg_to_load)
+    return envu.yaml_load(cfg_to_load, Loader=yaml.Loader)
 
 
 def merge_cfg_from_file(cfg_filename):
